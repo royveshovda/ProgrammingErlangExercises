@@ -33,10 +33,9 @@ all:	compile
 	@echo "  The results of the test are printed in the client window"
 
 compile: ${MODS:%=%.beam}
-	mkdir -p ${HOME}/.erlang_config/
-	cp conf ${HOME}/.erlang_config/lib_chan.conf
-	@echo "make clean - clean up"
-
+	#mkdir -p ${HOME}/.erlang_config/
+	#cp conf ${HOME}/.erlang_config/lib_chan.conf
+	
 chat_client: compile
 	erl -pa ../ -s chat_client test
 
