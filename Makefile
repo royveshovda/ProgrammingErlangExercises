@@ -39,6 +39,7 @@ shoutcast: compile
 subdirs:
 	cd socket_dist; make compile
 	cd escript-4.1; make 
+	cd exercises; make
 
 counter1.beam: counter1.erl
 	erlc -W0 counter1.erl
@@ -59,6 +60,10 @@ timer_tests:
 clean:	
 	rm -rf *.beam lists.ebeam erl_crash.dump 
 	rm -rf trigramsOS.tab trigramsS.tab trigrams.dict 
-	cd ets_trigrams; make_clean
-	cd socket_dist; make_clean
+	cd ets_trigrams; make clean
+	cd socket_dist; make clean
+	cd exercises; make clean
+
+ex:
+	cd exercises; make
 
