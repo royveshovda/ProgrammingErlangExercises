@@ -3,9 +3,9 @@
 .erl.beam:
 	erlc -W $<
 
-MODS =  
-        
-ERL = erl -boot start_clean 
+ERL = erl -noshell
+
+MODS = ex12
 
 all:	compile
 
