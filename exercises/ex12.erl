@@ -43,17 +43,29 @@ for(I, N, F) -> [F()|for(I+1, N, F)].
 %% TODO: Make measurements
 
 max_ring(Processes, Messages) ->
+    Max = erlang:system_info(process_limit),
+    io:format("Maximum allowed processes:~p~n",[Max]),
+
+    statistics(runtime),
+    statistics(wall_clock),
+
+
     Pid0 = self(),
     PidStart = for_spawn(Pid0, Processes, Processes),
-    io:format("All spawned~n"),
 
     pass_messages(PidStart, Messages),
     
+    {_, Time1} = statistics(runtime),
+    {_, Time2} = statistics(wall_clock),
+
     PidStart ! die,
     receive
         die -> io:format("Die received~n")
     end,
-    io:format("Done!~n").
+    U1 = Time1,
+    U2 = Time2,
+    io:format("Time=~p (~p) milliseconds~n",
+          [U1, U2]).
 
 for_spawn(PidToPassOnTo, 1, _) ->
     PidToReturn = spawn(fun() -> wait_for_message(PidToPassOnTo) end),
@@ -66,13 +78,12 @@ pass_messages(PidStart, 0) ->
     pass_message(PidStart);
 pass_messages(PidStart, Messages) ->
     pass_message(PidStart),
-    io:format("Ping~n"),
     pass_messages(PidStart, Messages-1).
 
 pass_message(PidStart) ->
     PidStart ! pass,
     receive
-        pass -> io:format("Token received~n")
+        pass -> void
     end.
     
 
