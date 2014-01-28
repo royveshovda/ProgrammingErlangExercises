@@ -97,11 +97,4 @@ restart_worker1() ->
 	keep_alive(alive1, ex13, i_am_alive1, []),
 	keep_alive(alive2, ex13, i_am_alive2, []),
 	keep_alive(alive3, ex13, i_am_alive3, []).
-	
-
-
-%% Exercises
-%% 6. Write a function that starts and monitors several worker processes.
-%% If any of the worker processes dies abnormally, kill all the worker processes and restart them all.
-
 
