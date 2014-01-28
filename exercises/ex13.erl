@@ -1,5 +1,5 @@
 -module(ex13).
--export([my_spawn1/3, my_spawn2/3, my_spawn3/4, sleeper/1]).
+-export([my_spawn1/3, my_spawn2/3, my_spawn3/4, sleeper/1, i_am_alive/0, monitor/0, start/0]).
 
 my_spawn1(Mod, Func, Args) ->
     statistics(wall_clock), %% calles to create a startTime
@@ -47,6 +47,27 @@ on_exit(Pid, Fun) ->
                     	io:format("Ran for =~p milliseconds~n",[RunTime])
 				end
 			end).
+
+i_am_alive() ->
+	receive
+		after 5000 ->
+			io:format("( ~p ) I am alive.~n", [self()]),
+			i_am_alive()
+	end.
+
+monitor() ->
+	Ref = erlang:monitor(process, alive),
+	receive
+		{'DOWN', Ref, process, _, _} ->
+			io:format("Restart~n"),
+			start(),
+			monitor()
+	end.
+
+start() ->
+	Pid = spawn(ex13, i_am_alive, []),
+	register(alive, Pid).
+
 
 
 %% Exercises
