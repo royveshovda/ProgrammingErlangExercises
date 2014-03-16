@@ -3,6 +3,50 @@
 	{
 		"selected_items":
 		[
+			[
+				"spawn",
+				"spawn_monitor"
+			],
+			[
+				"for",
+				"format"
+			],
+			[
+				"spa",
+				"spawn_monitor"
+			],
+			[
+				"Me",
+				"Messages"
+			],
+			[
+				"pass",
+				"pass_messages"
+			],
+			[
+				"Pid",
+				"PidStart"
+			],
+			[
+				"Pass",
+				"pass_messages"
+			],
+			[
+				"max",
+				"max_ring"
+			],
+			[
+				"Fun",
+				"Function"
+			],
+			[
+				"wait",
+				"wait_for_message"
+			],
+			[
+				"Proce",
+				"ProcessToPassOnTo"
+			]
 		]
 	},
 	"buffers":
@@ -11,26 +55,37 @@
 			"file": "ex12.erl",
 			"settings":
 			{
-				"buffer_size": 817,
+				"buffer_size": 2507,
+				"line_ending": "Unix"
+			}
+		},
+		{
+			"file": "ex14.erl",
+			"settings":
+			{
+				"buffer_size": 66,
 				"line_ending": "Unix",
-				"name": "-module(ex12)."
+				"name": "-module(ex14)."
 			}
 		}
 	],
 	"build_system": "Packages/Erlang/Erlang.sublime-build",
 	"command_palette":
 	{
-		"height": 0.0,
+		"height": 392.0,
 		"selected_items":
 		[
 		],
-		"width": 0.0
+		"width": 392.0
 	},
 	"console":
 	{
 		"height": 126.0,
 		"history":
 		[
+			"c(ex12).",
+			"erl",
+			"ls"
 		]
 	},
 	"distraction_free":
@@ -44,15 +99,21 @@
 	},
 	"file_history":
 	[
+		"/Users/royveshovda/code/ProgrammingErlangExercises/exercises/ex13.erl",
+		"/Users/royveshovda/code/ProgrammingErlangExercises/exercises/eratosthenes.erl",
+		"/Users/royveshovda/code/ProgrammingErlangExercises/exercises/ex12.erl",
+		"/Users/royveshovda/Library/Application Support/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/Users/royveshovda/code/ProgrammingErlangExercises/exercises/Makefile",
+		"/Users/royveshovda/Library/Application Support/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
 		"/Users/royveshovda/code/ProgrammingErlangExercises/exercises/exercises.sublime-project"
 	],
 	"find":
 	{
-		"height": 0.0
+		"height": 23.0
 	},
 	"find_in_files":
 	{
-		"height": 0.0,
+		"height": 93.0,
 		"where_history":
 		[
 		]
@@ -62,6 +123,7 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"path"
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -79,29 +141,59 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
 					"file": "ex12.erl",
-					"semi_transient": false,
+					"semi_transient": true,
 					"settings":
 					{
-						"buffer_size": 817,
+						"buffer_size": 2507,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								138,
-								138
+								472,
+								450
 							]
 						],
 						"settings":
 						{
-							"auto_name": "-module(ex12).",
+							"syntax": "Packages/Erlang/Erlang.tmLanguage",
+							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "ex14.erl",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 66,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								66,
+								66
+							]
+						],
+						"settings":
+						{
+							"auto_name": "-module(ex14).",
 							"syntax": "Packages/Erlang/Erlang.tmLanguage"
 						},
 						"translation.x": 0.0,
@@ -116,7 +208,7 @@
 	],
 	"incremental_find":
 	{
-		"height": 0.0
+		"height": 23.0
 	},
 	"input":
 	{
@@ -145,6 +237,10 @@
 		]
 	},
 	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 100.0
+	},
 	"output.find_results":
 	{
 		"height": 0.0
@@ -152,7 +248,7 @@
 	"project": "exercises.sublime-project",
 	"replace":
 	{
-		"height": 0.0
+		"height": 42.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -186,7 +282,7 @@
 	"show_open_files": true,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 150.0,
+	"side_bar_width": 247.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
