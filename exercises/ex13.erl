@@ -1,5 +1,5 @@
 -module(ex13).
--export([my_spawn1/3, my_spawn2/3, my_spawn3/4, sleeper/1, i_am_alive/0, i_am_alive1/0, i_am_alive2/0, i_am_alive3/0, monitor/0, start/0, restart_worker1/0, keep_alive/4, on_exit/2]).
+-export([my_spawn1/3, my_spawn2/3, my_spawn3/4, sleeper/1, i_am_alive/0, i_am_alive_with_timeout/1, monitor/0, start/0, restart_worker1/0, keep_alive/4, keep_alive2/4, on_exit/2, restart_all_workers/0, start_restart_all/0]).
 
 my_spawn1(Mod, Func, Args) ->
     statistics(wall_clock), %% calles to create a startTime
@@ -29,7 +29,7 @@ my_spawn3(Mod, Func, Args, Time) ->
 		    io:format("Ran for = ~p milliseconds~n",[RunTime])
 		after Time ->
 			exit(Pid, terminated),
-			io:format("Terminated")
+			io:format("Terminated~n")
 	end.
 
 sleeper(SleepTimeInMilliseconds) ->
@@ -55,25 +55,11 @@ i_am_alive() ->
 			i_am_alive()
 	end.
 
-i_am_alive1() ->
+i_am_alive_with_timeout(SleepTimeInMilliseconds) ->
 	receive
-		after 4000 ->
-			io:format("( ~p ) I am alive (1).~n", [self()]),
-			i_am_alive1()
-	end.
-
-i_am_alive2() ->
-	receive
-		after 5000 ->
-			io:format("( ~p ) I am alive (2).~n", [self()]),
-			i_am_alive2()
-	end.
-
-i_am_alive3() ->
-	receive
-		after 6000 ->
-			io:format("( ~p ) I am alive (3).~n", [self()]),
-			i_am_alive3()
+		after SleepTimeInMilliseconds ->
+			io:format("( ~p ) I am alive.~n", [self()]),
+			i_am_alive_with_timeout(SleepTimeInMilliseconds)
 	end.
 
 monitor() ->
@@ -91,10 +77,26 @@ start() ->
 
 keep_alive(Name, Mod, Fun, Args) ->
 	register(Name, Pid = spawn(Mod, Fun, Args)),
-	on_exit(Pid, fun(_Why) -> keep_alive(Name, Mod, Fun, Args) end).
+	on_exit(Pid, fun(_Why) -> keep_alive(Name, Mod, Fun, Args) end),
+	ok.
+
+keep_alive2(Name, Mod, Fun, Args) ->
+	Pid = spawn_link(Mod, Fun, Args),
+	register(Name, Pid),
+	on_exit(Pid, fun(_Why) -> keep_alive2(Name, Mod, Fun, Args) end),
+	Pid.
 
 restart_worker1() ->
-	keep_alive(alive1, ex13, i_am_alive1, []),
-	keep_alive(alive2, ex13, i_am_alive2, []),
-	keep_alive(alive3, ex13, i_am_alive3, []).
+	keep_alive(alive1, ex13, i_am_alive_with_timeout, [4000]),
+	keep_alive(alive2, ex13, i_am_alive_with_timeout, [5000]),
+	keep_alive(alive3, ex13, i_am_alive_with_timeout, [6000]),
+	keep_alive(alive4, ex13, i_am_alive_with_timeout, [7000]).
 
+restart_all_workers() ->
+	keep_alive2(alive1, ex13, i_am_alive_with_timeout, [4000]),
+	keep_alive2(alive2, ex13, i_am_alive_with_timeout, [5000]),
+	keep_alive2(alive3, ex13, i_am_alive_with_timeout, [6000]),
+	keep_alive2(alive4, ex13, i_am_alive_with_timeout, [7000]).
+
+start_restart_all() ->
+	spawn(ex13, restart_all_workers, []).
